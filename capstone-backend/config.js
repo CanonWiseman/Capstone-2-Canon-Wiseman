@@ -4,7 +4,7 @@
 
 require("dotenv").config();
 require("colors");
-const key = require("./secret");
+const {key} = require("./secret");
 
 const SECRET_KEY = process.env.SECRET_KEY || "secret-dev";
 
