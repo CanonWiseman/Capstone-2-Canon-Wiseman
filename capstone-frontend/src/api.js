@@ -68,5 +68,12 @@ class SteamApis {
     return res;
   }
   //**************end functions for steam store data api ******************/
+
+  //functions for Steam API
+  static async getAppDetails(appId){
+    let res = await this.request(`steam/getAppDetails?appId=${appId}`);
+    return res;
+  }
+  //**************end functions for steam api ******************/
 }
 export default SteamApis;

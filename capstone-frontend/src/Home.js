@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import SteamApis from "./api";
-import { Loader } from "./misc/Loader";
+import { Loader } from "./miscComponents/Loader";
 import { GamesList } from "./games/GamesList";
 
 export function Home(){
@@ -8,11 +8,12 @@ export function Home(){
     const [isLoading, setIsLoading] = useState(true);
     const [cats, setCats] = useState([]);
 
+    //Grabs categories from steam api
     useEffect(() => {
         async function getCats(){
             const res = await SteamApis.getFeaturedCats();
-            console.log(res);
-            
+            //cuts new releases items length from 30 to 10
+            res.new_releases.items.length = 10
             setCats(res);
             setIsLoading(false);
         }

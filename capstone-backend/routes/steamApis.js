@@ -1,7 +1,7 @@
 
 const express = require("express");
 const axios = require('axios');
-const {steamStoreDataKey} = require('../secret');
+const {steamStoreDataKey, steamApiKey} = require('../secret');
 const router = new express.Router();
 
 
@@ -69,6 +69,25 @@ router.get('/getFeaturedCats', async function(req, res, next){
                 "X-RapidAPI-Key": steamStoreDataKey,
                 "X-RapidAPI-Host": steamStoreDataHost
             }
+        });
+        return res.status(201).json(response.data);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
+//Routes for Steam API
+const steamApiUrl = "https://store.steampowered.com";
+
+router.get('/getAppDetails', async function(req,res,next){
+    const q = req.query;
+    const appId = req.query.appId;
+
+    try{
+        const response = await axios({
+            method: 'get',
+            url: `${steamApiUrl}/api/appdetails?appids=${appId}`
         });
         return res.status(201).json(response.data);
     }
