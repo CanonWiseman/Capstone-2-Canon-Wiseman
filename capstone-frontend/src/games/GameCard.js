@@ -1,17 +1,15 @@
 import React, {useState} from "react";
 import { convertToDollars } from "../helpers/currencyConverter";
 import { GameThumbnail } from "./GameThumbnail";
+import { useHover } from "@uidotdev/usehooks";
 
 export function GameCard({game}) {
     const [showThumbnail, setShowThumbnail] = useState(false);
+    const [ref, hovering] = useHover();
 
-    function toggleThumbnail(){
-        showThumbnail === false ? setShowThumbnail(true) : setShowThumbnail(false)
-    }
-
+    
     return(
-        <div className="GameCard" onMouseEnter={() => toggleThumbnail()} onMouseLeave={() => toggleThumbnail()}>
-            {showThumbnail ? <GameThumbnail gameId={game.id}/> : null}
+        <div className="GameCard" ref={ref} >
             <img src={game.small_capsule_image} alt={`${game.name} teaser`} />
             <p>{game.name}</p>
             <p>
@@ -19,6 +17,11 @@ export function GameCard({game}) {
                     game.final_price === 0 ? "Free" : convertToDollars(game.final_price)
                 }
             </p>
-        </div>
+            {/* {
+            hovering
+            ? <GameThumbnail/>
+            :null
+            } */}
+        </div>  
     )
 }

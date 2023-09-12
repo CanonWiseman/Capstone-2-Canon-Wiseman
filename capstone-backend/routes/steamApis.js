@@ -96,4 +96,17 @@ router.get('/getAppDetails', async function(req,res,next){
     }
 });
 
+// router.get('/getFeaturedCats', async function(req,res,next){
+//     try{
+//         const response = await axios({
+//             method: 'get',
+//             url: `${steamApiUrl}/api/featuredcategories/?l=english`
+//         });
+//         return res.status(201).json(response.data);
+//     }
+//     catch(err){
+//         return next(err);
+//     }
+// });
+
 module.exports = router;

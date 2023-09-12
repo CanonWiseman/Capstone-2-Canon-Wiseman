@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import SteamApis from "./api";
 import { Loader } from "./miscComponents/Loader";
 import { GamesList } from "./games/GamesList";
+import { v4 as uuidv4 } from 'uuid';
 
 export function Home(){
     
@@ -28,16 +29,16 @@ export function Home(){
             <div className="Home container">
                 <div className="row">
                     <div className="col-lg-6">
-                        <GamesList title="Top Sellers" games={cats.top_sellers.items}/>
+                        <GamesList key={uuidv4()} title="Top Sellers" games={cats.top_sellers.items}/>
                     </div>
                     <div className="col-lg-6">
-                        <GamesList title="New Releases" games={cats.new_releases.items}/>
+                        <GamesList key={uuidv4()} title="New Releases" games={cats.new_releases.items}/>
                     </div>
                     <div className="col-lg-6">
-                        <GamesList title="Specials" games={cats.specials.items}/>
+                        <GamesList key={uuidv4()} title="Specials" games={cats.specials.items}/>
                     </div>
                     <div className="col-lg-6">
-                        <GamesList title="Coming Soon" games={cats.coming_soon.items}/>
+                        <GamesList key={uuidv4()} title="Coming Soon" games={cats.coming_soon.items}/>
                     </div>
                 </div>
             </div>
