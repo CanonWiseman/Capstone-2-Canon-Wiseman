@@ -8,8 +8,8 @@ export function GamesList({title, games}){
         <div className="GamesList">
             <h3 className="GamesList-Title">{title}</h3>
             {games.map(game =>(
-                <Link to={`/app/${game.id}`}>
-                    <GameCard key={uuidv4()} game={game}/>
+                <Link key={uuidv4()} to={`/app/${game.id}`}>
+                    <GameCard game={game}/>
                 </Link>
             ))}
         </div>

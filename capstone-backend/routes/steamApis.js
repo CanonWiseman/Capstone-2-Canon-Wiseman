@@ -60,22 +60,22 @@ router.get('/getFeaturedGames', async function(req, res, next){
     }
 });
 
-router.get('/getFeaturedCats', async function(req, res, next){
-    try{
-        const response = await axios({
-            method: 'get',
-            url: `${steamStoreDataUrl}/api/featuredcategories`,
-            headers: {
-                "X-RapidAPI-Key": steamStoreDataKey,
-                "X-RapidAPI-Host": steamStoreDataHost
-            }
-        });
-        return res.status(201).json(response.data);
-    }
-    catch(err){
-        return next(err);
-    }
-});
+// router.get('/getFeaturedCats', async function(req, res, next){
+//     try{
+//         const response = await axios({
+//             method: 'get',
+//             url: `${steamStoreDataUrl}/api/featuredcategories`,
+//             headers: {
+//                 "X-RapidAPI-Key": steamStoreDataKey,
+//                 "X-RapidAPI-Host": steamStoreDataHost
+//             }
+//         });
+//         return res.status(201).json(response.data);
+//     }
+//     catch(err){
+//         return next(err);
+//     }
+// });
 
 //Routes for Steam API
 const steamApiUrl = "https://store.steampowered.com";
@@ -96,17 +96,19 @@ router.get('/getAppDetails', async function(req,res,next){
     }
 });
 
-// router.get('/getFeaturedCats', async function(req,res,next){
-//     try{
-//         const response = await axios({
-//             method: 'get',
-//             url: `${steamApiUrl}/api/featuredcategories/?l=english`
-//         });
-//         return res.status(201).json(response.data);
-//     }
-//     catch(err){
-//         return next(err);
-//     }
-// });
+router.get('/getFeaturedCats', async function(req,res,next){
+    console.debug("official steam store");
+    try{
+        const response = await axios({
+            method: 'get',
+            url: `${steamApiUrl}/api/featuredcategories/?l=english`
+        });
+        return res.status(201).json(response.data);
+    }
+    catch(err){
+        return next(err);
+    }
+});
 
+//Routes for steam 
 module.exports = router;
