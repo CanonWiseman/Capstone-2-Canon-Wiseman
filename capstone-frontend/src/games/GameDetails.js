@@ -2,10 +2,14 @@ import React, {useEffect, useState} from "react";
 import { Loader } from "../miscComponents/Loader";
 import SteamApis from "../api";
 import { useParams } from "react-router-dom";
+import {formatNumber} from "../helpers/numberFormatter";
 
 export function GameDetails(){
     const [isLoading, setIsLoading] = useState(true);
     const [gameDetails, setGameDetails] = useState(null);
+    const [playerCount, setPlayerCount] = useState(null);
+    const [steamSpyTags, setSteamSpyTags] = useState(null);
+
     const params = useParams();
     
     useEffect(() => {
@@ -13,8 +17,13 @@ export function GameDetails(){
             const res = await SteamApis.getAppDetails(params.id);
             setGameDetails(res[`${params.id}`].data);
             console.log(res[`${params.id}`].data);
+            const res2 = await SteamApis.getPlayerCount(params.id);
+            console.log(res2.response);
+            const res3 = await SteamApis.getSteamSpyDetails(params.id);
+            console.log(res3.tags);
+            setSteamSpyTags(res3.tags);
+            setPlayerCount(res2.response.player_count);
             setIsLoading(false);
-            
         }
         getDetails();
     }, [])
@@ -54,6 +63,10 @@ export function GameDetails(){
                                     <td>Release Date</td>
                                     <td>{gameDetails.release_date.date}</td>
                                 </tr>
+                                <tr>
+                                    <td>Genres</td>
+                                    <td>{gameDetails.genres.map(genre => genre.description).join(", ")}</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -68,6 +81,14 @@ export function GameDetails(){
                             </div> 
                             : null 
                         }
+                        {playerCount > 0 ?
+                            <div>
+                                <p>{formatNumber(playerCount)}</p>
+                                <p>in game</p>
+                            </div> 
+                            : null 
+                        }
+                        { }
                         
                     </div>
                 </div>

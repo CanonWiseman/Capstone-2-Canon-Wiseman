@@ -37,6 +37,20 @@ router.get('/top100AllTime', async function(req, res, next){
     }
 });
 
+router.get('/getSteamSpyDetails', async function(req, res, next){
+    const appId = req.query.appId
+    try{
+        const response = await axios({
+            method: 'get',
+            url: `${SteamSpyUrl}?request=appdetails&appid=${appId}`
+        });
+        return res.status(201).json(response.data);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
 //Routes for Steam Store Data Api on Rapid API
 //Link to rapid API page https://rapidapi.com/archergardinersheridan/api/steam-store-data
 
@@ -81,14 +95,13 @@ router.get('/getFeaturedGames', async function(req, res, next){
 const steamApiUrl = "https://store.steampowered.com";
 
 router.get('/getAppDetails', async function(req,res,next){
-    const q = req.query;
     const appId = req.query.appId;
 
     try{
         const response = await axios({
             method: 'get',
             url: `${steamApiUrl}/api/appdetails?appids=${appId}`
-        });
+        });  
         return res.status(201).json(response.data);
     }
     catch(err){
@@ -97,7 +110,6 @@ router.get('/getAppDetails', async function(req,res,next){
 });
 
 router.get('/getFeaturedCats', async function(req,res,next){
-    console.debug("official steam store");
     try{
         const response = await axios({
             method: 'get',
@@ -110,5 +122,21 @@ router.get('/getFeaturedCats', async function(req,res,next){
     }
 });
 
-//Routes for steam 
+//Routes for steam powered
+
+const steamPoweredApiUrl = "https://api.steampowered.com";
+
+router.get("/getCurrentPlayerCounts", async function(req, res, next){
+    const appId = req.query.appId;
+    try{
+        const response = await axios({
+            method: 'get',
+            url: `${steamPoweredApiUrl}/ISteamUserStats/GetNumberOfCurrentPlayers/v1?appid=${appId}`
+        });
+        return res.status(201).json(response.data);
+    }
+    catch(err){
+        return res.status(201).json({response: {player_count: 0}});
+    }
+});
 module.exports = router;

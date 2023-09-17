@@ -51,6 +51,11 @@ class SteamApis {
     return res;
   }
 
+  static async getSteamSpyDetails(appId){
+    let res = await this.request(`steam/getSteamSpyDetails?appId=${appId}`);
+    return res;
+  }
+
   //******end functions for Steam Spy API  *************/
 
   //functions for Steam Store Data Api on Rapid API
@@ -75,5 +80,13 @@ class SteamApis {
     return res;
   }
   //**************end functions for steam api ******************/
+
+  //functions for steam powered api
+  static async getPlayerCount(appId){
+    let res = await this.request(`steam/getCurrentPlayerCounts?appId=${appId}`);
+    return res;
+  }
+  //**************end functions for steam api ******************/
+
 }
 export default SteamApis;
