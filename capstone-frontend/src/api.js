@@ -86,7 +86,17 @@ class SteamApis {
     let res = await this.request(`steam/getCurrentPlayerCounts?appId=${appId}`);
     return res;
   }
-  //**************end functions for steam api ******************/
+
+  static async getAppNews(appId){
+    let res = await this.request(`steam/getAppNews?appId=${appId}`);
+    return res;
+  }
+
+  static async getGameSchema(appId){
+    let res = await this.request(`steam/getGameSchema?appId=${appId}`);
+    return res;
+  }
+  //**************end functions for steam powered api ******************/
 
 }
 export default SteamApis;

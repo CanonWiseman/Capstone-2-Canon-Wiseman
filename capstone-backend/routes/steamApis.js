@@ -139,4 +139,32 @@ router.get("/getCurrentPlayerCounts", async function(req, res, next){
         return res.status(201).json({response: {player_count: 0}});
     }
 });
+
+router.get("/getAppNews", async function(req, res, next){
+    const appId = req.query.appId;
+    try{
+        const response = await axios({
+            method: 'get',
+            url: `${steamPoweredApiUrl}/ISteamNews/GetNewsForApp/v2?appid=${appId}`
+        });
+        return res.status(201).json(response.data);
+    }
+    catch(err){
+        return res.status(201).json({response: {player_count: 0}});
+    }
+});
+
+router.get("/getGameSchema", async function(req, res, next){
+    const appId = req.query.appId;
+    try{
+        const response = await axios({
+            method: 'get',
+            url: `${steamPoweredApiUrl}/ISteamUserStats/GetSchemaForGame/v2?appid=${appId}&key=${steamApiKey}`
+        });
+        return res.status(201).json(response.data);
+    }
+    catch(err){
+        return res.status(201).json({response: {player_count: 0}});
+    }
+});
 module.exports = router;
