@@ -161,10 +161,24 @@ router.get("/getGameSchema", async function(req, res, next){
             method: 'get',
             url: `${steamPoweredApiUrl}/ISteamUserStats/GetSchemaForGame/v2?appid=${appId}&key=${steamApiKey}`
         });
-        return res.status(201).json(response.data);
+        return res.status(201).json(response.data.game.availableGameStats.achievements);
     }
     catch(err){
-        return res.status(201).json({response: {player_count: 0}});
+        return res.status(201).json({game: {availableGameStats: {achievements: []}}});
+    }
+});
+
+router.get("/getAchievementPercentage", async function(req, res, next){
+    const appId = req.query.appId;
+    try{
+        const response = await axios({
+            method: 'get',
+            url: `${steamPoweredApiUrl}/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v2?appid=${appId}`
+        });
+        return res.status(201).json(response.data.game.availableGameStats.achievements);
+    }
+    catch(err){
+        return res.status(201).json({game: {availableGameStats: {achievements: []}}});
     }
 });
 module.exports = router;

@@ -6,6 +6,7 @@ import {formatNumber} from "../helpers/numberFormatter";
 import { GameScreenshots } from "./GameScreenshots";
 import { GameDetailsTable } from "./GameDetailsTable";
 import { GameNews } from "./GameNews";
+import { GameAchievements } from "./GameAchievments";
 
 export function GameDetails(){
     const [isLoading, setIsLoading] = useState(true);
@@ -21,12 +22,10 @@ export function GameDetails(){
         async function getDetails(){
             const res = await SteamApis.getAppDetails(params.id);
             setGameDetails(res[`${params.id}`].data);
-            console.log(res[`${params.id}`].data);
             const res2 = await SteamApis.getPlayerCount(params.id);
             // const res3 = await SteamApis.getSteamSpyDetails(params.id);
             const res3 = await SteamApis.getAppNews(params.id);
             const res4 = await SteamApis.getGameSchema(params.id);
-            console.log(res4);
             setGameNews(res3.appnews.newsitems);
             setGameSchema(res4);
             // setSteamSpyTags(res3.tags);
@@ -86,6 +85,10 @@ export function GameDetails(){
                     <div className="col-lg-12">
                         <h2>News</h2>
                         <GameNews news={gameNews}/>
+                    </div>
+                    <div className="col-lg-12">
+                        <h2>Achievements</h2>
+                        <GameAchievements schema={gameSchema}/>
                     </div>
                 </div>
             </div>

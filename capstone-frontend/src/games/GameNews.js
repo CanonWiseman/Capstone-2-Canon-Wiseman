@@ -2,7 +2,6 @@ import React from "react"
 import { v4 as uuidv4 } from 'uuid';
 
 export function GameNews({news}){
-    console.log(news);
     if(news.length > 0){
         return (
             <div>
