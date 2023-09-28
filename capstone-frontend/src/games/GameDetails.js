@@ -64,7 +64,7 @@ export function GameDetails(){
                             </div> 
                             : null 
                         }
-                        {gameDetails.categories.length > 0 ? 
+                        {gameDetails.categories && gameDetails.categories.length > 0 ? 
                             <div>
                                 <p>Categories</p>
                                 {gameDetails.categories.map(cat => (cat.description)).join(", ")}

@@ -15,6 +15,7 @@ export function Home(){
             const res = await SteamApis.getFeaturedCats();
             //cuts new releases items length from 30 to 10
             res.new_releases.items.length = 10
+            console.log(res);
             setCats(res);
             setIsLoading(false);
         }

@@ -98,5 +98,9 @@ class SteamApis {
   }
   //**************end functions for steam powered api ******************/
 
+  static async getAllApps(){
+    let res = await this.request('steam/getAllApps');
+    return res;
+  }
 }
 export default SteamApis;

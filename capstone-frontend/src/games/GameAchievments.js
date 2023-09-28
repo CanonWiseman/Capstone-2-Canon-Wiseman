@@ -2,7 +2,6 @@ import React from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 export function GameAchievements({schema}){
-    console.log(schema)
     if(schema.length > 0){
         return(
             <table>

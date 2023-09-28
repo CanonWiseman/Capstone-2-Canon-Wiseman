@@ -57,22 +57,22 @@ router.get('/getSteamSpyDetails', async function(req, res, next){
 const steamStoreDataUrl = "https://steam-store-data.p.rapidapi.com";
 const steamStoreDataHost = "steam-store-data.p.rapidapi.com";
 
-router.get('/getFeaturedGames', async function(req, res, next){
-    try{
-        const response = await axios({
-            method: 'get',
-            url: `${steamStoreDataUrl}/api/featured`,
-            headers: {
-                "X-RapidAPI-Key": steamStoreDataKey,
-                "X-RapidAPI-Host": steamStoreDataHost
-            }
-        });
-        return res.status(201).json(response.data);
-    }
-    catch(err){
-        return next(err);
-    }
-});
+// router.get('/getFeaturedGames', async function(req, res, next){
+//     try{
+//         const response = await axios({
+//             method: 'get',
+//             url: `${steamStoreDataUrl}/api/featured`,
+//             headers: {
+//                 "X-RapidAPI-Key": steamStoreDataKey,
+//                 "X-RapidAPI-Host": steamStoreDataHost
+//             }
+//         });
+//         return res.status(201).json(response.data);
+//     }
+//     catch(err){
+//         return next(err);
+//     }
+// });
 
 // router.get('/getFeaturedCats', async function(req, res, next){
 //     try{
@@ -100,7 +100,7 @@ router.get('/getAppDetails', async function(req,res,next){
     try{
         const response = await axios({
             method: 'get',
-            url: `${steamApiUrl}/api/appdetails?appids=${appId}`
+            url: `${steamApiUrl}/api/appdetails?appids=${appId}&l=english`
         });  
         return res.status(201).json(response.data);
     }
@@ -145,7 +145,7 @@ router.get("/getAppNews", async function(req, res, next){
     try{
         const response = await axios({
             method: 'get',
-            url: `${steamPoweredApiUrl}/ISteamNews/GetNewsForApp/v2?appid=${appId}`
+            url: `${steamPoweredApiUrl}/ISteamNews/GetNewsForApp/v2?appid=${appId}&l=english`
         });
         return res.status(201).json(response.data);
     }
@@ -181,4 +181,21 @@ router.get("/getAchievementPercentage", async function(req, res, next){
         return res.status(201).json({game: {availableGameStats: {achievements: []}}});
     }
 });
+
+router.get("/getAllApps", async function(req, res, next){
+    try{
+        const response = await axios({
+            method: 'get',
+            url: `${steamPoweredApiUrl}/ISteamApps/GetAppList/v0002/?format=json`
+        });
+        return res.status(201).json(response.data);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
+//routes for steamworks API
+
+const steamworksUrl = "https://partner.steam-api.com";
 module.exports = router;

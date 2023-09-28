@@ -5,6 +5,7 @@ import { NavBar } from "./NavBar";
 import { GameDetails } from "./games/GameDetails";
 
 export function Router(){
+    
     return (
         <Routes>
             <Route element={<NavBar/>}>
