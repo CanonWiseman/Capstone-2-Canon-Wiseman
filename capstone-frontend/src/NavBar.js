@@ -16,7 +16,7 @@ export function NavBar(){
                         <NavLink to="#">Sales</NavLink>
                         <NavLink to="#">Charts</NavLink>
                         <NavLink to="#">Calculator</NavLink>
-                        <NavLink to="#">Upcoming</NavLink>
+                        <NavLink to="/logout">logout</NavLink>
                     </NavItem>
                 </Nav>
             </Navbar>

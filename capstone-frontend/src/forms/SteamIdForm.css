@@ -1,0 +1,7 @@
+.SteamValid{
+    border: 1px solid green;
+}
+
+.SteamInvalid{
+    border: 1px solid red;
+}

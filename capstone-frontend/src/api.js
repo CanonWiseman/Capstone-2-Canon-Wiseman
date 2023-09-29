@@ -101,14 +101,60 @@ class SteamApis {
     let res = await this.request('steam/getAllApps');
     return res;
   }
+
+  static async getPlayerLevel(steamId){
+    let res = await this.request(`steam/getPlayerSteamLevel?steamId=${steamId}`);
+    return res;
+  }
+
+  static async getPlayerGames(steamId){
+    let res = await this.request(`steam/getPlayerSteamGames?steamId=${steamId}`);
+    return res;
+  }
+
+  static async getPlayerRecentlyPlayed(steamId){
+    let res = await this.request(`steam/getPlayerRecentlyPlayed?steamId=${steamId}`);
+    return res;
+  }
+
+  static async getPlayerBadges(steamId){
+    let res = await this.request(`steam/getPlayerBadges?steamId=${steamId}`);
+    return res;
+  }
+
+  static async getPlayerCommunityBadges(steamId, badgeId){
+    let res = await this.request(`steam/getPlayerCommunityBadges?steamId=${steamId}&badgeId=${badgeId}`);
+    return res;
+  }
+
+  static async getPlayerFriends(steamId){
+    let res = await this.request(`steam/getPlayerFriends?steamId=${steamId}`);
+    return res;
+  }
+
+  static async getPlayerSummary(steamIds){
+    let res = await this.request(`steam/getPlayerSummaries?steamIds=${steamIds}`);
+    return res;
+  }
+  
+  static async getPlayerAchievments(steamId, appId){
+    let res = await this.request(`steam/getPlayerAchievements?steamId=${steamId}&appId=${appId}`);
+    return res;
+  }
+
+  static async getGlobalPlayerAchievments(appId){
+    let res = await this.request(`steam/getGlobalPlayerAchievements?appId=${appId}`);
+    return res;
+  }
+
+  static async getPlayerStats(appId, steamId){
+    let res = await this.request(`steam/getPlayerStats?appId=${appId}&steamId=${steamId}`);
+    return res;
+  }
+  
   //**************end functions for steam powered api ******************/
 
    //**************functions for steam works api ******************/
-
-   static async getPlayerLevel(steamId){
-    let res = await this.request(`steam/getPlayerSteamLevel?steamId=${steamId}`);
-    return res;
-   }
     //**************end functions for steam powered api ******************/
 }
 export default SteamApis;

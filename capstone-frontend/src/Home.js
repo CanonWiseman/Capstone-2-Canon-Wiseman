@@ -1,17 +1,19 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useContext} from "react";
 import SteamApis from "./api";
 import { Loader } from "./miscComponents/Loader";
 import { GamesList } from "./games/GamesList";
 import { v4 as uuidv4 } from 'uuid';
 import { SteamIdForm } from "./forms/SteamIdForm";
-import { useLocalStorage } from "@uidotdev/usehooks";
+import AppContext from "./helpers/AppContext";
+import { UserDashboard } from "./user/UserDashboard";
 
 export function Home(){
     
-    const[steamId, saveSteamId] = useLocalStorage('steamId', null);
+    const {steamId} = useContext(AppContext);
+
     const [isLoading, setIsLoading] = useState(true);
     const [cats, setCats] = useState([]);
-    
+
     //Grabs categories from steam api
     useEffect(() => {
         async function getCats(){
@@ -24,6 +26,8 @@ export function Home(){
         getCats();
     }, [])
 
+
+
     if(isLoading){
         return <Loader/>
     }
@@ -31,10 +35,17 @@ export function Home(){
         return (
             <div className="Home container">
                 <div className="row">
+                    {steamId? 
+                    <div className="col-12">
+                        <UserDashboard/>
+                    </div>
+                    :
                     <div className="col-12">
                         <h2>Enter your Steam Id for a more personalized experience</h2>
-                        <SteamIdForm saveSteamId={saveSteamId}/>
+                        <SteamIdForm/>
                     </div>
+                    }
+                    
                 </div>
                 <div className="row">
                     <div className="col-lg-6">

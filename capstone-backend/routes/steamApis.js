@@ -218,6 +218,149 @@ router.get('/getPlayerSteamLevel', async function(req, res, next){
     }
 });
 
+router.get('/getPlayerSteamGames', async function(req, res, next){
+   const steamId = req.query.steamId;
+   try{
+    const response = await axios({
+        method: 'get',
+        url: `${steamPoweredApiUrl}/IPlayerService/GetOwnedGames/v1/?key=${steamApiKey}&steamid=${steamId}&include_appinfo=true&include_played_free_games=true`
+    });
+    return res.status(201).json(response.data);
+   }
+   catch(err){
+    return next(err);
+   }
+});
+
+router.get('/getPlayerRecentlyPlayed', async function(req, res, next){
+    const steamId = req.query.steamId;
+    try{
+     const response = await axios({
+         method: 'get',
+         url: `${steamPoweredApiUrl}/IPlayerService/GetRecentlyPlayedGames/v1/?key=${steamApiKey}&steamid=${steamId}`
+     });
+     return res.status(201).json(response.data);
+    }
+    catch(err){
+     return next(err);
+    }
+ });
+
+ router.get('/getPlayerRecentlyPlayed', async function(req, res, next){
+    const steamId = req.query.steamId;
+    const appId = req.query.appId;
+    try{
+     const response = await axios({
+         method: 'get',
+         url: `${steamPoweredApiUrl}/IPlayerService/GetSingleGamePlaytime/v1/?key=${steamApiKey}&steamid=${steamId}&appId=${appId}`
+     });
+     return res.status(201).json(response.data);
+    }
+    catch(err){
+     return next(err);
+    }
+ });
+
+ router.get('/getPlayerBadges', async function(req, res, next){
+    const steamId = req.query.steamId;
+    try{
+     const response = await axios({
+         method: 'get',
+         url: `${steamPoweredApiUrl}/IPlayerService/GetBadges/v1/?key=${steamApiKey}&steamid=${steamId}`
+     });
+     return res.status(201).json(response.data);
+    }
+    catch(err){
+     return next(err);
+    }
+ });
+
+ router.get('/getPlayerCommunityBadges', async function(req, res, next){
+    const steamId = req.query.steamId;
+    const badgeId = req.query.badgeId;
+    try{
+     const response = await axios({
+         method: 'get',
+         url: `${steamPoweredApiUrl}/IPlayerService/GetCommunityBadgeProgress/v1/?key=${steamApiKey}&steamid=${steamId}&badgeid=${badgeId}`
+     });
+     return res.status(201).json(response.data);
+    }
+    catch(err){
+     return next(err);
+    }
+ });
+
+ router.get('/getPlayerFriends', async function(req, res, next){
+    const steamId = req.query.steamId;
+    try{
+     const response = await axios({
+         method: 'get',
+         url: `${steamPoweredApiUrl}/ISteamUser/GetFriendList/v1?key=${steamApiKey}&steamid=${steamId}`
+     });
+     return res.status(201).json(response.data);
+    }
+    catch(err){
+     return next(err);
+    }
+ });
+
+ router.get('/getPlayerSummaries', async function(req, res, next){
+    const steamIds = req.query.steamIds;
+    try{
+     const response = await axios({
+         method: 'get',
+         url: `${steamPoweredApiUrl}/ISteamUser/GetPlayerSummaries/v2?key=${steamApiKey}&steamids=${steamIds}`
+     });
+     return res.status(201).json(response.data);
+    }
+    catch(err){
+     return next(err);
+    }
+ });
+
+ router.get('/getPlayerAchievements', async function(req, res, next){
+    const steamId = req.query.steamId;
+    appId = req.query.appId;
+    try{
+     const response = await axios({
+         method: 'get',
+         url: `${steamPoweredApiUrl}/ISteamUserStats/GetPlayerAchievements/v1??key=${steamApiKey}&steamid=${steamId}&appid=${appId}`
+     });
+     return res.status(201).json(response.data);
+    }
+    catch(err){
+     return next(err);
+    }
+ });
+
+ router.get('/getGlobalPlayerAchievements', async function(req, res, next){
+    appId = req.query.appId;
+    try{
+     const response = await axios({
+         method: 'get',
+         url: `${steamPoweredApiUrl}/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v2?gameid=${appId}`
+     });
+     return res.status(201).json(response.data);
+    }
+    catch(err){
+     return next(err);
+    }
+ });
+
+ router.get('/getPlayerStats', async function(req, res, next){
+    appId = req.query.appId;
+    steamId = req.query.steamId;
+    try{
+     const response = await axios({
+         method: 'get',
+         url: `${steamPoweredApiUrl}/ISteamUserStats/GetUserStatsForGame/v2?key=${steamApiKey}&steamid=${steamId}&appid=${appId}`
+     });
+     return res.status(201).json(response.data);
+    }
+    catch(err){
+     return next(err);
+    }
+ });
 //**************************/
 //routes for steamworks API
 //**************************/
