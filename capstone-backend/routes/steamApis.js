@@ -4,9 +4,10 @@ const axios = require('axios');
 const {steamStoreDataKey, steamApiKey} = require('../secret');
 const router = new express.Router();
 
-
+//**************************/
 //Routes for Steam Spy API
 //link to Steam Spy API page https://steamspy.com/api.php
+//**************************/
 
 const SteamSpyUrl = 'https://steamspy.com/api.php';
 // Returns Top 100 games for the past 2 weeks.
@@ -51,8 +52,11 @@ router.get('/getSteamSpyDetails', async function(req, res, next){
     }
 });
 
+//**************************/
 //Routes for Steam Store Data Api on Rapid API
 //Link to rapid API page https://rapidapi.com/archergardinersheridan/api/steam-store-data
+//**************************/
+//None of the these routes are needed but will be kept just in case
 
 const steamStoreDataUrl = "https://steam-store-data.p.rapidapi.com";
 const steamStoreDataHost = "steam-store-data.p.rapidapi.com";
@@ -91,7 +95,10 @@ const steamStoreDataHost = "steam-store-data.p.rapidapi.com";
 //     }
 // });
 
+
+//**************************/
 //Routes for Steam API
+//**************************/
 const steamApiUrl = "https://store.steampowered.com";
 
 router.get('/getAppDetails', async function(req,res,next){
@@ -122,7 +129,9 @@ router.get('/getFeaturedCats', async function(req,res,next){
     }
 });
 
+//**************************/
 //Routes for steam powered
+//**************************/
 
 const steamPoweredApiUrl = "https://api.steampowered.com";
 
@@ -195,7 +204,29 @@ router.get("/getAllApps", async function(req, res, next){
     }
 });
 
+router.get('/getPlayerSteamLevel', async function(req, res, next){
+    const steamId = req.query.steamId;
+    try{
+        const response = await axios({
+            method: 'get',
+            url: `${steamPoweredApiUrl}/IPlayerService/GetSteamLevel/v1/?key=${steamApiKey}&steamid=${steamId}`
+        });
+        return res.status(201).json(response.data);
+    }
+    catch(err){
+        return res.status(201).json({response: {player_level: "failed"}});
+    }
+});
+
+//**************************/
 //routes for steamworks API
+//**************************/
 
 const steamworksUrl = "https://partner.steam-api.com";
+
+
+
+
+
+
 module.exports = router;

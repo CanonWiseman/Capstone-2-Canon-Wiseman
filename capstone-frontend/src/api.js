@@ -96,11 +96,19 @@ class SteamApis {
     let res = await this.request(`steam/getGameSchema?appId=${appId}`);
     return res;
   }
-  //**************end functions for steam powered api ******************/
 
   static async getAllApps(){
     let res = await this.request('steam/getAllApps');
     return res;
   }
+  //**************end functions for steam powered api ******************/
+
+   //**************functions for steam works api ******************/
+
+   static async getPlayerLevel(steamId){
+    let res = await this.request(`steam/getPlayerSteamLevel?steamId=${steamId}`);
+    return res;
+   }
+    //**************end functions for steam powered api ******************/
 }
 export default SteamApis;

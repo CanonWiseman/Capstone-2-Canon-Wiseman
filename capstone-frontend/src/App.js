@@ -6,26 +6,17 @@ import { useState, useEffect } from 'react';
 import AppContext from './helpers/AppContext';
 import { Loader } from './miscComponents/Loader';
 import SteamApis from './api';
-import Fuse from "fuse.js";
-
 
 function App() {
 
-  const fuseOptions  = {
-    includeScore: true,
-    includeMatches: true,
-    threshold: 0.2,
-    keys: ["appid", "name"],
-  }
-
   const [isLoading, setIsLoading] = useState(true);
+  const [allApps, setAllApps] = useState([]);
 
   useEffect(() => {
     async function getAllApps(){
         const res = await SteamApis.getAllApps();
+        setAllApps(res.applist.apps);
         setIsLoading(false);
-        const fuse = new Fuse(res.applist.apps, fuseOptions);
-        const fuseResult = fuse.search("baldurs");
     }
     getAllApps();
   },[]);
@@ -37,13 +28,15 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <main>
-          <Router/>
-        </main> 
+        <AppContext.Provider value={{allApps}}>
+          <NavBar/>
+          <main>
+            <Router/>
+          </main>
+        </AppContext.Provider>
       </BrowserRouter>
     </div>
   );
-  
 }
 
 export default App;
