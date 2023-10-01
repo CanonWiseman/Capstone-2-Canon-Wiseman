@@ -1,18 +1,13 @@
-import React, { useContext, useEffect } from "react";
-import AppContext from "../helpers/AppContext";
+import React, {useEffect} from "react";
 import { useNavigate } from "react-router-dom"; 
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 
 export function Logout(){
     const navigate = useNavigate();
-    const {saveSteamId, setSteamPlayerGames, setSteamPlayerLevel, setSteamPlayerRecentlyPlayed, setSteamPlayerBadges, setSteamPlayerSummary} = useContext(AppContext);
-    
+    const [steamId, saveSteamId] = useLocalStorage('steamId');
+
     useEffect(() =>{
-        setSteamPlayerSummary(null);
-        setSteamPlayerBadges(null);
-        setSteamPlayerRecentlyPlayed(null);
-        setSteamPlayerLevel(null);
-        setSteamPlayerGames(null);
         saveSteamId(null);
         navigate('/');
     })

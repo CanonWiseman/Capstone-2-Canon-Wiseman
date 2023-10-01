@@ -129,6 +129,20 @@ router.get('/getFeaturedCats', async function(req,res,next){
     }
 });
 
+router.get('/getWishlist', async function(req,res,next){
+    const steamId = req.query.steamId;
+    try{
+        const response = await axios({
+            method: 'get',
+            url: `${steamApiUrl}/wishlist/profiles/${steamId}/wishlistdata`
+        }); 
+        return res.status(201).json(response.data);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
 //**************************/
 //Routes for steam powered
 //**************************/
@@ -223,7 +237,7 @@ router.get('/getPlayerSteamGames', async function(req, res, next){
    try{
     const response = await axios({
         method: 'get',
-        url: `${steamPoweredApiUrl}/IPlayerService/GetOwnedGames/v1/?key=${steamApiKey}&steamid=${steamId}&include_appinfo=true&include_played_free_games=true`
+        url: `${steamPoweredApiUrl}/IPlayerService/GetOwnedGames/v1/?key=${steamApiKey}&steamid=${steamId}&include_appinfo=true&include_played_free_games=true&include_extended_appinfo=true`
     });
     return res.status(201).json(response.data);
    }
@@ -268,6 +282,11 @@ router.get('/getPlayerRecentlyPlayed', async function(req, res, next){
          method: 'get',
          url: `${steamPoweredApiUrl}/IPlayerService/GetBadges/v1/?key=${steamApiKey}&steamid=${steamId}`
      });
+     const response2 = await axios({
+        method: 'get',
+        url: "https://github.com/nolddor/steam-badges-db/raw/main/data/badges.min.json"
+     });
+     response.data["badgeInfo"] = response2.data;
      return res.status(201).json(response.data);
     }
     catch(err){

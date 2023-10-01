@@ -79,6 +79,11 @@ class SteamApis {
     let res = await this.request(`steam/getAppDetails?appId=${appId}`);
     return res;
   }
+
+  static async getWishlist(steamId){
+    let res = await this.request(`steam/getWishlist?steamId=${steamId}`);
+    return res;
+  }
   //**************end functions for steam api ******************/
 
   //functions for steam powered api

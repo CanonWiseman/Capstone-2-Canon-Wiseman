@@ -1,11 +1,9 @@
-import React, {useState, useContext} from "react";
+import React, {useState} from "react";
 import SteamApis from "../api";
 import "./SteamIdForm.css";
-import AppContext from "../helpers/AppContext";
+import { useLocalStorage } from "@uidotdev/usehooks";
 
-export function SteamIdForm(){
-
-    const {saveSteamId} = useContext(AppContext);
+export function SteamIdForm({saveSteamId}){
 
     const INITIAL_VALUES = {
         steamId: ""
