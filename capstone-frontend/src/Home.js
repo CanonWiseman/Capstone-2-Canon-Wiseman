@@ -20,7 +20,7 @@ export function Home(){
             setIsLoading(true);
             const res = await SteamApis.getFeaturedCats();
             //cuts new releases items length from 30 to 10
-            res.new_releases.items.length = 10;
+            // res.new_releases.items.length = 10;
             setCats(res);
             setIsLoading(false);
         }
@@ -38,7 +38,7 @@ export function Home(){
                 <div className="row">
                     {steamId? 
                     <div className="col-12">
-                        <UserDashboard steamId={steamId}/>
+                        <UserDashboard steamId={steamId} isUser={true}/>
                     </div>
                     :
                     <div className="col-12">
@@ -49,16 +49,16 @@ export function Home(){
                     
                 </div>
                 <div className="row">
-                    <div className="col-lg-6">
+                    <div className="col-lg-12">
                         <GamesList key={uuidv4()} title="Top Sellers" games={cats.top_sellers.items}/>
                     </div>
-                    <div className="col-lg-6">
+                    <div className="col-lg-12">
                         <GamesList key={uuidv4()} title="New Releases" games={cats.new_releases.items}/>
                     </div>
-                    <div className="col-lg-6">
+                    <div className="col-lg-12">
                         <GamesList key={uuidv4()} title="Specials" games={cats.specials.items}/>
                     </div>
-                    <div className="col-lg-6">
+                    <div className="col-lg-12">
                         <GamesList key={uuidv4()} title="Coming Soon" games={cats.coming_soon.items}/>
                     </div>
                 </div>

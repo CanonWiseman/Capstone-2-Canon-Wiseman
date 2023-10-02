@@ -15,6 +15,7 @@ export function GameDetails(){
     const [gameSchema, setGameSchema] = useState(null);
     // const [steamSpyTags, setSteamSpyTags] = useState(null);
     const [gameNews, setGameNews] = useState(null);
+    const [gameReviews, setGameReviews] = useState(null);
 
     const params = useParams();
     
@@ -23,18 +24,22 @@ export function GameDetails(){
             const res = await SteamApis.getAppDetails(params.id);
             setGameDetails(res[`${params.id}`].data);
             const res2 = await SteamApis.getPlayerCount(params.id);
+            setPlayerCount(res2.response.player_count);
             // const res3 = await SteamApis.getSteamSpyDetails(params.id);
             const res3 = await SteamApis.getAppNews(params.id);
-            const res4 = await SteamApis.getGameSchema(params.id);
             setGameNews(res3.appnews.newsitems);
+            const res4 = await SteamApis.getGameSchema(params.id);
             setGameSchema(res4);
+            const res5 = await SteamApis.getReviews(params.id, "positive");
+            setGameReviews(res5.reviews);
+            console.log(res5);
             // setSteamSpyTags(res3.tags);
-            setPlayerCount(res2.response.player_count);
             setIsLoading(false);
         }
         getDetails();
     }, [])
 
+    console.log(gameDetails);
     if(isLoading){
         return <Loader/>
     }

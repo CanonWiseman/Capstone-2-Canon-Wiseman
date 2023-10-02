@@ -135,6 +135,38 @@ router.get('/getWishlist', async function(req,res,next){
         const response = await axios({
             method: 'get',
             url: `${steamApiUrl}/wishlist/profiles/${steamId}/wishlistdata`
+        });
+        return res.status(201).json(response.data);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
+router.get('/getWishlist2', async function(req,res,next){
+    const steamId = req.query.steamId;
+    try{
+        const response = await axios({
+            method: 'get',
+            url: `${steamApiUrl}/wishlist/id/${steamId}/wishlistdata`
+        });
+
+        console.log(response);
+
+        return res.status(201).json(response.data);
+    }
+    catch(err){
+        return next(err);
+    }
+});
+
+router.get('/getReviews', async function(req,res,next){
+    const appId = req.query.appId;
+    const reviewType = req.query.reviewType;
+    try{
+        const response = await axios({
+            method: 'get',
+            url: `${steamApiUrl}/appreviews/${appId}?json=1&language=english&num_per_page=100&filter=recent&review_type=${reviewType}`
         }); 
         return res.status(201).json(response.data);
     }
@@ -142,6 +174,8 @@ router.get('/getWishlist', async function(req,res,next){
         return next(err);
     }
 });
+
+
 
 //**************************/
 //Routes for steam powered
@@ -282,11 +316,6 @@ router.get('/getPlayerRecentlyPlayed', async function(req, res, next){
          method: 'get',
          url: `${steamPoweredApiUrl}/IPlayerService/GetBadges/v1/?key=${steamApiKey}&steamid=${steamId}`
      });
-     const response2 = await axios({
-        method: 'get',
-        url: "https://github.com/nolddor/steam-badges-db/raw/main/data/badges.min.json"
-     });
-     response.data["badgeInfo"] = response2.data;
      return res.status(201).json(response.data);
     }
     catch(err){

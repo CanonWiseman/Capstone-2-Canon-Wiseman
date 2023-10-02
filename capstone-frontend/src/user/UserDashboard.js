@@ -3,15 +3,16 @@ import { Loader } from "../miscComponents/Loader";
 import SteamApis from "../api";
 import Moment from 'react-moment';
 import { UserRecentlyPlayed } from "./UserRecentlyPlayed";
-import { UserBadges } from "./UserBadges";
 import { UserGames } from "./UserGames";
+import { UserWishlist } from "./UserWishlist";
 
-export function UserDashboard({steamId}){
+
+export function UserDashboard({steamId, isUser}){
 
     const[isLoading, setIsLoading] = useState(true);
     const [steamPlayerLevel, setSteamPlayerLevel] = useState(null);
     const [steamPlayerSummary, setSteamPlayerSummary] = useState(null);
-    const [steamPlayerWishlist, setSteamPlayerWishlist] = useState(null);
+    const [steamFriends, setSteamFriends] = useState(null);
 
     useEffect(() => {
         async function getPlayerSummary(){
@@ -21,14 +22,20 @@ export function UserDashboard({steamId}){
                 setSteamPlayerLevel(playerLevel.response);
                 const playerSummary = await SteamApis.getPlayerSummary(steamId);
                 setSteamPlayerSummary(playerSummary.response.players[0]);
-                const playerWishlist = await SteamApis.getWishlist(steamId);
-                setSteamPlayerWishlist(playerWishlist);
+                try{
+                    const playerFriends = await SteamApis.getPlayerFriends(steamId);
+                    setSteamFriends(playerFriends);
+                }
+                catch(err){
+                    setSteamFriends(false);
+                }
                 setIsLoading(false);
           }
         }
         getPlayerSummary();
     }, [steamId]);
 
+    // console.log(steamPlayerSummary);
     if(isLoading){
         return <Loader/>
     }
@@ -46,11 +53,13 @@ export function UserDashboard({steamId}){
                                 <tr>
                                     <td>Steam Id</td>
                                     <td>{steamPlayerSummary.steamid}</td>
-                                </tr>
-                                <tr>
-                                    <td>Country Code</td>
-                                    <td>{steamPlayerSummary.loccountrycode}</td>
-                                </tr>
+                                </tr> 
+                                    {steamPlayerSummary.loccountrycode ? 
+                                    <tr>
+                                        <td>Country Code</td>
+                                        <td>{steamPlayerSummary.loccountrycode}</td>
+                                    </tr>
+                                    :null}
                                 {steamPlayerSummary.locstatecode?
                                 <tr>
                                     <td>State Code</td>
@@ -65,14 +74,27 @@ export function UserDashboard({steamId}){
                                     <td>Steam Level</td>
                                     <td>{steamPlayerLevel.player_level}</td>
                                 </tr>
+                                <tr>
+                                    <td>Friends</td>
+                                    <td>
+                                        {steamFriends ? 
+                                            <a href={`/users/${steamId}/friends`}>{steamFriends.friendslist.friends.length}</a>
+                                        : "N/A"}
+                                        
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                     <div className="col-12">
                         <UserRecentlyPlayed steamId={steamId}/>
+                        
                     </div>
                     <div className="col-12">
                         <UserGames steamId={steamId}/>
+                    </div>
+                    <div className="col-12">
+                        <UserWishlist steamId={steamId}/>
                     </div>
                 </div>
             </div>
