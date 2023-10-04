@@ -6,11 +6,13 @@ import { convertToHours } from "../helpers/minutesToHours";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';  
 import { v4 as uuidv4 } from 'uuid'; 
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 export function UserGames({steamId}){
     
     const[isLoading, setIsLoading] = useState(true);
     const [steamPlayerGames, setSteamPlayerGames] = useState(null);
+    const [userId] = useLocalStorage('steamId', null);
 
     const responsive = {
         superLargeDesktop: {
@@ -51,7 +53,7 @@ export function UserGames({steamId}){
         return (
             <div className="container">
                 <div className="row">
-                    <h6>Library</h6>
+                    <h2>Library</h2>
                     <Carousel
                         swipeable={true}
                         draggable={true}

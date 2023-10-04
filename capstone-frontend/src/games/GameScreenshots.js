@@ -1,18 +1,32 @@
 import React from "react";
-
+import "swiper/css";
+import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import "./GameScreenshots.css"
 
 // Import Swiper styles
 import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 import { v4 as uuidv4 } from 'uuid';
 
 export function GameScreenshots({screenshots, movies}){
+
+    
     return (
-        <Swiper slidesPerView={1} loop={true}>
+        <div className="">
+            <Swiper 
+            slidesPerView={1} 
+            loop={true}
+            navigation={true}
+            pagination={true}
+            modules={[Navigation, Pagination]}>
+                
             {screenshots.map(screenshot => (
                 <SwiperSlide key={uuidv4()}>
-                    <img src={screenshot.path_full} alt={screenshot.id}/>
+                    <img src={screenshot.path_full} alt={screenshot.id} className="screenshot"/>
                 </SwiperSlide>
             ))}
             {/* {movies.map(movie => (
@@ -22,6 +36,8 @@ export function GameScreenshots({screenshots, movies}){
                     </video>
                 </SwiperSlide>
             ))} */}
-        </Swiper>
+            </Swiper>
+        </div>
+        
     )
 }

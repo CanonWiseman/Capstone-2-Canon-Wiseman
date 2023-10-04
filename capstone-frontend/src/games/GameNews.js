@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import bbCodeParser from 'js-bbcode-parser';
 
 export function GameNews({news}){
-    
+    console.log(news);
     if(news.length > 0){
         return (
             <div>

@@ -1,0 +1,17 @@
+.SearchForm{
+    position: relative;
+}
+
+.search-results{
+    width: 500px;
+    height: 200px;
+    overflow-y: scroll;
+}
+
+.showRes{
+    display: block;
+}
+
+.hideRes{
+    display: none;
+}

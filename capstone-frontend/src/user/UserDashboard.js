@@ -6,8 +6,7 @@ import { UserRecentlyPlayed } from "./UserRecentlyPlayed";
 import { UserGames } from "./UserGames";
 import { UserWishlist } from "./UserWishlist";
 
-
-export function UserDashboard({steamId, isUser}){
+export function UserDashboard({steamId}){
 
     const[isLoading, setIsLoading] = useState(true);
     const [steamPlayerLevel, setSteamPlayerLevel] = useState(null);
@@ -47,7 +46,7 @@ export function UserDashboard({steamId, isUser}){
                         <img src={steamPlayerSummary.avatarfull} alt="Users Avatar"/>
                         <h3>{steamPlayerSummary.personaname}</h3>
                     </div>
-                    <div className="col-12">
+                    <div className="col-12 d-flex justify-content-center">
                         <table>
                             <tbody>
                                 <tr>
@@ -86,14 +85,13 @@ export function UserDashboard({steamId, isUser}){
                             </tbody>
                         </table>
                     </div>
-                    <div className="col-12">
+                    <div className="col-12 mt-5">
                         <UserRecentlyPlayed steamId={steamId}/>
-                        
                     </div>
-                    <div className="col-12">
+                    <div className="col-12 mt-5">
                         <UserGames steamId={steamId}/>
                     </div>
-                    <div className="col-12">
+                    <div className="col-12 mt-5">
                         <UserWishlist steamId={steamId}/>
                     </div>
                 </div>

@@ -18,7 +18,6 @@ export function UserFriends(){
             const friends = playerFriends.friendslist.friends;
             const friendsIds = friends.map((friend) => friend.steamid);
             const friendSummary = await SteamApis.getPlayerSummary(friendsIds.join(","));
-            console.log(friendSummary);
             setSteamFriends(friendSummary);
             setIsLoading(false);
         }

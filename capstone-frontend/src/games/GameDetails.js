@@ -7,6 +7,7 @@ import { GameScreenshots } from "./GameScreenshots";
 import { GameDetailsTable } from "./GameDetailsTable";
 import { GameNews } from "./GameNews";
 import { GameAchievements } from "./GameAchievments";
+import { UserNews } from "../user/UserNews";
 
 export function GameDetails(){
     const [isLoading, setIsLoading] = useState(true);
@@ -32,14 +33,12 @@ export function GameDetails(){
             setGameSchema(res4);
             const res5 = await SteamApis.getReviews(params.id, "positive");
             setGameReviews(res5.reviews);
-            console.log(res5);
             // setSteamSpyTags(res3.tags);
             setIsLoading(false);
         }
         getDetails();
     }, [])
 
-    console.log(gameDetails);
     if(isLoading){
         return <Loader/>
     }
@@ -88,8 +87,7 @@ export function GameDetails(){
                         <GameScreenshots screenshots={gameDetails.screenshots} movies={gameDetails.movies}/>
                     </div>
                     <div className="col-lg-12">
-                        <h2>News</h2>
-                        <GameNews news={gameNews}/>
+                        <UserNews appIds={[{appId: params.id, appName: gameDetails.name}]} title="" numArticles={100}/>
                     </div>
                     <div className="col-lg-12">
                         <h2>Achievements</h2>

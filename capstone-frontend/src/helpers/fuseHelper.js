@@ -12,7 +12,8 @@ function fuseHelper(appName, allApps){
     const fuse = new Fuse(allApps, fuseOptions);
 
     const fuseResult = fuse.search(appName);
-    console.log(fuseResult);
+    
+    return fuseResult;
 }
 
 export {fuseHelper};

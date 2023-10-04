@@ -1,0 +1,17 @@
+.article-content{
+    max-height: 800px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.article-content img{
+    width: 30%;
+    height: auto;
+}
+
+.NavBtn{
+    
+}

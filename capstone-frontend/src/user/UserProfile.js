@@ -27,7 +27,7 @@ export function UserProfile(){
     }
     else{
         return (
-            <UserDashboard steamId={params.id} isUser={false}/>
+            <UserDashboard steamId={params.id}/>
         )
     }
 }

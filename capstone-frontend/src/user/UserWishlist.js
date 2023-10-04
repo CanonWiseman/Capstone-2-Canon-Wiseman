@@ -4,13 +4,17 @@ import SteamApis from "../api";
 import Moment from 'react-moment';
 import { v4 as uuidv4 } from 'uuid';
 import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';   
+import 'react-multi-carousel/lib/styles.css';
+import { useLocalStorage } from "@uidotdev/usehooks";
+import { UserNews } from "./UserNews";
 
 export function UserWishlist({steamId}){
 
     const[isLoading, setIsLoading] = useState(true);
     const [steamPlayerWishlist, setSteamPlayerWishlist] = useState(null);
-    const[steamApiErr, setSteamApiErr] = useState(false);
+    const [steamApiErr, setSteamApiErr] = useState(false);
+    const [userId] = useLocalStorage('steamId');
+    const [articleIds, setArticleIds] = useState([]);
 
     const responsive = {
         superLargeDesktop: {
@@ -38,16 +42,26 @@ export function UserWishlist({steamId}){
                 try{
                     const playerWishlist = await SteamApis.getWishlist(steamId);
                     setSteamPlayerWishlist(playerWishlist);
+                    if(userId === steamId){
+                        console.log("working");
+                        let articles = [];
+                        for (let [k, v] of Object.entries(playerWishlist)) {
+                            articles.push({appId: k, appName: v.name});
+                        }
+                        console.log("done");
+                        setArticleIds(articles);
+                    }
                     setIsLoading(false);
                 }
                 catch(err){
+                    console.log("caught");
                     setSteamApiErr(true);
                     setIsLoading(false);
                 }
             }
         }
         getPlayerWishlist();
-    }, [steamId]);
+    }, []);
 
     if(isLoading){
         return <Loader/>
@@ -56,8 +70,11 @@ export function UserWishlist({steamId}){
         return(
             <div className="container">
                 <div className="row">
-                    <h5>Wishlist</h5>
                     {!steamApiErr ? 
+                    
+                    <div>
+                        <h5>Wishlist</h5>
+                    
                         <Carousel
                         swipeable={true}
                         draggable={true}
@@ -75,20 +92,9 @@ export function UserWishlist({steamId}){
                         itemClass="carousel-item-padding-40-px"
                         partialVisible={false}
                         >
-                            {Object.keys(steamPlayerWishlist).map(appId =>(
-                            <div key={uuidv4()}>
-                                <a href={`/app/${appId}`}>
-                                    <img src={steamPlayerWishlist[appId].capsule} alt="game thumbnail"/>
-                                    <h6>{steamPlayerWishlist[appId].name}</h6>
-                                    <p>Date Added: <Moment format="MM/DD/YYYY" unix>{steamPlayerWishlist[appId].added}</Moment></p>
-                                    <p>Release Date: {steamPlayerWishlist[appId].release_string}</p>
-                                </a>
-                            </div>
-                    ))}
-                        </Carousel>
-                    : <div className="col-12"><h6>Data Unavailable</h6></div>}
-                    {/* {Object.keys(steamPlayerWishlist).map(appId =>(
-                        <div className="col-4" key={uuidv4()}>
+
+                        {Object.keys(steamPlayerWishlist).map(appId =>(
+                        <div key={uuidv4()}>
                             <a href={`/app/${appId}`}>
                                 <img src={steamPlayerWishlist[appId].capsule} alt="game thumbnail"/>
                                 <h6>{steamPlayerWishlist[appId].name}</h6>
@@ -96,8 +102,19 @@ export function UserWishlist({steamId}){
                                 <p>Release Date: {steamPlayerWishlist[appId].release_string}</p>
                             </a>
                         </div>
-                    ))} */}
-                </div>
+                        ))}
+
+                        </Carousel>
+                        
+                        
+                        {articleIds.length > 0 ? 
+                            <UserNews appIds={articleIds} title={"Wishlist"} numArticles={4}/>
+                        : null}
+                        </div>
+                        
+                        : <h5>WishList Data unavailable</h5>}
+                    
+                    </div>
             </div>
         )
     }

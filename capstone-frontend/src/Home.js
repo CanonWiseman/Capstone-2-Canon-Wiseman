@@ -38,7 +38,7 @@ export function Home(){
                 <div className="row">
                     {steamId? 
                     <div className="col-12">
-                        <UserDashboard steamId={steamId} isUser={true}/>
+                        <UserDashboard steamId={steamId}/>
                     </div>
                     :
                     <div className="col-12">
