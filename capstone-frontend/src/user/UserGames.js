@@ -6,13 +6,12 @@ import { convertToHours } from "../helpers/minutesToHours";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';  
 import { v4 as uuidv4 } from 'uuid'; 
-import { useLocalStorage } from "@uidotdev/usehooks";
+import "./UserGames.css";
 
 export function UserGames({steamId}){
     
     const[isLoading, setIsLoading] = useState(true);
     const [steamPlayerGames, setSteamPlayerGames] = useState(null);
-    const [userId] = useLocalStorage('steamId', null);
 
     const responsive = {
         superLargeDesktop: {
@@ -38,7 +37,12 @@ export function UserGames({steamId}){
             if(steamId && steamId !== null){
                 setIsLoading(true);
                 const playerGames = await SteamApis.getPlayerGames(steamId);
-                setSteamPlayerGames(playerGames.response);
+                if(!playerGames.response.games){
+                    setSteamPlayerGames(false);
+                }
+                else{
+                    setSteamPlayerGames(playerGames.response);
+                }
                 setIsLoading(false);
           }
         }
@@ -51,40 +55,40 @@ export function UserGames({steamId}){
     }
     else{
         return (
-            <div className="container">
+            <div className="container UserDashboard-section UserGames">
                 <div className="row">
-                    <h2>Library</h2>
-                    <Carousel
-                        swipeable={true}
-                        draggable={true}
-                        slidesToSlide={4}
-                        showDots={false}
-                        responsive={responsive}
-                        ssr={true} // means to render carousel on server-side.
-                        infinite={true}
-                        keyBoardControl={true}
-                        customTransition="all .5"
-                        transitionDuration={500}
-                        containerClass="carousel-container"
-                        removeArrowOnDeviceType={["tablet", "mobile"]}
-                        dotListClass="custom-dot-list-style"
-                        itemClass="carousel-item-padding-40-px"
-                    >
-                        {steamPlayerGames.games.map(game =>(
-                            game.img_icon_url !== "" ? 
-                                <div key={uuidv4()}>
-                                    <a href={`/app/${game.appid}`}>
-                                        <img src={`http://media.steampowered.com/steamcommunity/public/images/apps/${game.appid}/${game.img_icon_url}.jpg`} alt="game thumbnail"/>
-                                        <h6>{game.name}</h6>
-                                        <p>Total Played: {convertToHours(game.playtime_forever)}</p>
-                                        {game.rtime_last_played && game.rtime_last_played !== 0?
-                                            <p>Last Played: <Moment format="MM/DD/YYYY" unix>{game.rtime_last_played}</Moment></p>
-                                        :null}
-                                    </a>
-                                </div>
-                            : null
-                        ))}
-                    </Carousel>
+                    <h2 className="Dashboard-title">Library</h2>
+                    {steamPlayerGames ?
+                        <Carousel
+                            swipeable={true}
+                            draggable={true}
+                            slidesToSlide={4}
+                            showDots={false}
+                            responsive={responsive}
+                            ssr={true} // means to render carousel on server-side.
+                            infinite={true}
+                            keyBoardControl={true}
+                            containerClass="carousel-container"
+                            removeArrowOnDeviceType={["tablet", "mobile"]}
+                            dotListClass="custom-dot-list-style"
+                            itemClass="carousel-item-padding-40-px"
+                            >
+                            {steamPlayerGames.games.map(game =>(
+                                game.img_icon_url !== "" ? 
+                                    <div className="UserGame-card" key={uuidv4()}>
+                                        <a href={`/app/${game.appid}`}>
+                                            <img src={`http://media.steampowered.com/steamcommunity/public/images/apps/${game.appid}/${game.img_icon_url}.jpg`} alt="game thumbnail"/>
+                                            <h6>{game.name}</h6>
+                                            <p>Total Played: {convertToHours(game.playtime_forever)}</p>
+                                            {game.rtime_last_played && game.rtime_last_played !== 0?
+                                                <p>Last Played: <Moment format="MM/DD/YYYY" unix>{game.rtime_last_played}</Moment></p>
+                                            :null}
+                                        </a>
+                                    </div>
+                                : null
+                            ))}
+                        </Carousel>
+                    : <h4 className="data-unavailable">Player Library data unavailable</h4>}
                 </div>
             </div>
         )

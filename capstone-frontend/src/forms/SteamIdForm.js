@@ -34,11 +34,12 @@ export function SteamIdForm({saveSteamId}){
     }
 
     return (
-        <div className="SteamIdForm">
-            <form className="" onSubmit={handleSubmit}>
+        <div className="SteamIdForm d-flex justify-content-center">
+            <form className="col-2" onSubmit={handleSubmit} autoComplete={"off"}>
                 <input
                     id="steamId"
                     name="steamId"
+                    className="form-control"
                     type="text"
                     placeholder={`Enter Steam Id`}
                     value={formData.steamId}

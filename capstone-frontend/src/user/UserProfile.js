@@ -2,8 +2,6 @@ import React, {useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import { Loader } from "../miscComponents/Loader";
 import SteamApis from "../api";
-import Moment from 'react-moment';
-import { v4 as uuidv4 } from 'uuid';
 import { UserDashboard } from "./UserDashboard";
 
 export function UserProfile(){

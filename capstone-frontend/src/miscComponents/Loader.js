@@ -1,21 +1,18 @@
-import {Oval} from "react-loader-spinner";
+import {Grid} from "react-loader-spinner";
 import "./Loader.css";
 
 export function Loader(){
     return(
         <div className="Loader">
             <div className="Loader-center">
-                <Oval
+                <Grid
                     height={100}
                     width={100}
-                    color="#4fa94d"
+                    color="#101e23"
                     wrapperStyle={{}}
                     wrapperClass=""
                     visible={true}
-                    ariaLabel='oval-loading'
-                    secondaryColor="#4fa94d"
-                    strokeWidth={2}
-                    strokeWidthSecondary={2}
+                    ariaLabel='grid-loading'
                 />
             </div>
         </div>

@@ -5,9 +5,11 @@ import { useParams } from "react-router-dom";
 import {formatNumber} from "../helpers/numberFormatter";
 import { GameScreenshots } from "./GameScreenshots";
 import { GameDetailsTable } from "./GameDetailsTable";
-import { GameNews } from "./GameNews";
 import { GameAchievements } from "./GameAchievments";
 import { UserNews } from "../user/UserNews";
+import { GameReviews } from "./GameReviews";
+import "./GameDetails.css";
+import { useNavigate} from "react-router-dom";
 
 export function GameDetails(){
     const [isLoading, setIsLoading] = useState(true);
@@ -15,84 +17,86 @@ export function GameDetails(){
     const [playerCount, setPlayerCount] = useState(null);
     const [gameSchema, setGameSchema] = useState(null);
     // const [steamSpyTags, setSteamSpyTags] = useState(null);
-    const [gameNews, setGameNews] = useState(null);
-    const [gameReviews, setGameReviews] = useState(null);
 
     const params = useParams();
+    let navigate = useNavigate();
     
     useEffect(() => {
         async function getDetails(){
-            const res = await SteamApis.getAppDetails(params.id);
-            setGameDetails(res[`${params.id}`].data);
-            const res2 = await SteamApis.getPlayerCount(params.id);
-            setPlayerCount(res2.response.player_count);
+            const details = await SteamApis.getAppDetails(params.id);
+            setGameDetails(details[`${params.id}`].data);
+            const userCount = await SteamApis.getPlayerCount(params.id);
+            setPlayerCount(userCount.response.player_count);
             // const res3 = await SteamApis.getSteamSpyDetails(params.id);
-            const res3 = await SteamApis.getAppNews(params.id);
-            setGameNews(res3.appnews.newsitems);
-            const res4 = await SteamApis.getGameSchema(params.id);
-            setGameSchema(res4);
-            const res5 = await SteamApis.getReviews(params.id, "positive");
-            setGameReviews(res5.reviews);
+            const achievments = await SteamApis.getGameSchema(params.id);
+            setGameSchema(achievments);
+            
             // setSteamSpyTags(res3.tags);
             setIsLoading(false);
         }
         getDetails();
-    }, [])
+    }, [params.id])
+
+    console.log(gameDetails);
 
     if(isLoading){
         return <Loader/>
+    }
+    else if(!gameDetails){
+        return(
+            <div className="GameDetails container" style={{height: "100vh"}}>
+                <div className="row">
+                    <div className="col-lg-12">
+                        <h2 className="data-unavailable">Data for this game is unavailable</h2>
+                        <button className="back-btn" onClick={() => navigate(-1)}>Back</button>
+                    </div>
+                </div>
+            </div>
+        )
     }
     else{
         return (
             <div className="GameDetails container">
                 <div className="row">
-                    <div className="col-lg-8">
+                    <div className="col-lg-8 d-flex align-items-center flex-column">
                         <h2 className="GameDetailsGameTitle">{gameDetails.name}</h2>
                         <GameDetailsTable gameDetails={gameDetails}/>
                     </div>
-                    <div className="col-lg-4">
+                    <div className="col-lg-4 d-flex align-items-center flex-column GameDetails-tags">
                         <img src={gameDetails.capsule_image} alt={gameDetails.name}></img>
                         {gameDetails.metacritic ?
                             <div>
                                 <a href={gameDetails.metacritic.url}>
-                                    <p>Metacritic score</p>
-                                    <p>{gameDetails.metacritic.score}</p>
+                                    <p className="GameDetails-tag-title">Metacritic score: {gameDetails.metacritic.score}</p>
                                 </a>
                             </div> 
                             : null 
                         }
                         {playerCount > 0 ?
                             <div>
-                                <p>{formatNumber(playerCount)}</p>
-                                <p>in game</p>
+                                <p className="GameDetails-tag-title">{formatNumber(playerCount)} Player(s) in game</p>
                             </div> 
                             : null 
                         }
                         {gameDetails.categories && gameDetails.categories.length > 0 ? 
                             <div>
-                                <p>Categories</p>
+                                <p className="GameDetails-tag-title">Categories</p>
                                 {gameDetails.categories.map(cat => (cat.description)).join(", ")}
                             </div>
                         : null}
                         {gameDetails.short_description ?
                             <div>
+                                <p className="GameDetails-tag-title">Description</p>
                                 <p>{gameDetails.short_description}</p>
                             </div>
                         : null}
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-lg-12">
-                        <h2>Screenshots</h2>
-                        <GameScreenshots screenshots={gameDetails.screenshots} movies={gameDetails.movies}/>
-                    </div>
-                    <div className="col-lg-12">
-                        <UserNews appIds={[{appId: params.id, appName: gameDetails.name}]} title="" numArticles={100}/>
-                    </div>
-                    <div className="col-lg-12">
-                        <h2>Achievements</h2>
-                        <GameAchievements schema={gameSchema}/>
-                    </div>
+                    <GameScreenshots screenshots={gameDetails.screenshots} movies={gameDetails.movies}/>
+                    <UserNews appIds={[{appId: params.id, appName: gameDetails.name}]} title="" numArticles={100}/>
+                    <GameAchievements schema={gameSchema}/>
+                    <GameReviews appId={params.id}/>
                 </div>
             </div>
         )

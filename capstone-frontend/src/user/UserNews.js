@@ -21,27 +21,33 @@ export function UserNews({appIds, title, numArticles}){
                 if(article.appnews.newsitems.length > numArticles){
                     article.appnews.newsitems.length = numArticles;
                 }
-                for(let item of article.appnews.newsitems){
-                    item["appName"] = app.appName;
-                    allArticles.push(item);
+                if(article !== undefined){
+                    for(let item of article.appnews.newsitems){
+                        item["appName"] = app.appName;
+                        allArticles.push(item);
+                    }
+                    setArticles(allArticles);
                 }
+                else{
+                    setArticles([]);
+                }
+                
             }
-            setArticles(allArticles);
+            
             setIsLoading(false);
         }
         getNewsArticles();
-    }, []);
+    }, [appIds, numArticles]);
 
     function Item({article})
     {
         return (
-            <Paper>
-                <h2>{article.appName}</h2>
-                <h2>{article.title}</h2>
+            <Paper id="UserNews-article">
+                <h2 className="article-title">{article.title}</h2>
                 <p>Author: {article.author}</p>
                 <p>Posted: {<Moment format="MM/DD/YYYY" unix>{article.date}</Moment>}</p>
                 <p>Feed: {article.feedlabel}</p>
-                <div className="article-content" dangerouslySetInnerHTML={{__html: bbCodeParser.parse(article.contents).replaceAll('{STEAM_CLAN_IMAGE}', "https://clan.akamai.steamstatic.com/images/")}}></div>
+                <div className="article-content" dangerouslySetInnerHTML={{__html: bbCodeParser.parse(article.contents).replaceAll('{STEAM_CLAN_IMAGE}', "https://clan.akamai.steamstatic.com/images/").replaceAll('[*]', '<br>-')}}></div>
             </Paper>
         )
     }
@@ -54,14 +60,17 @@ export function UserNews({appIds, title, numArticles}){
             <div className="container mt-5">
                 <div className="row">
                     <div className="col-12 text-center">
-                        <h4>{title} News</h4>
+                        <h4 className="UserNews-title">{title} News & Updates</h4>
                     </div>
                     <div className="col-12 mt-3">
-                    <Carousel autoPlay={false} swipe={false} navButtonsAlwaysVisible={true} navButtonsWrapperProps={{className:"NavBtns"}}>
-                        {
-                            articles.map((article, i) => <Item key={i} article={article}/>)
-                        }
-                    </Carousel>
+                        {articles.length > 0 ? 
+                            <Carousel autoPlay={false} swipe={false} navButtonsAlwaysVisible={true} navButtonsWrapperProps={{className:"NavBtns"}}>
+                                {
+                                    articles.map((article, i) => <Item key={i} article={article}/>)
+                                }
+                            </Carousel>
+                        : <h5 className="data-unavailable">No News Available</h5>}
+                        
                     </div>
                 </div>
             </div>

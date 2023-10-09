@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { Loader } from "../miscComponents/Loader";
 import SteamApis from "../api";
-import { v4 as uuidv4 } from 'uuid';
 
 export function UserBadges({steamId}){
 

@@ -1,0 +1,16 @@
+.GamesList-title{
+    color: white;
+    margin-top: 25px;
+}
+
+.carousel-container-GamesList{
+    height: 350px;
+}
+
+.react-multiple-carousel__arrow--right{
+    bottom: 0px;
+}
+
+.react-multiple-carousel__arrow--left{
+    bottom: 0px;
+}

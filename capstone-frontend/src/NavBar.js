@@ -3,6 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import { Navbar, Nav, NavItem } from "reactstrap";
 import { SearchForm } from "./forms/SearchForm";
 import { useLocalStorage } from "@uidotdev/usehooks";
+import "./NavBar.css";
 
 export function NavBar(){
 
@@ -12,17 +13,14 @@ export function NavBar(){
         <div className="NavBar">
             <Navbar expand="md">
                 <Link to="/" className="NavBar-logo">
-                    Steam DB
+                    Steam Helper
                 </Link>
-                <SearchForm/>
-                <Nav className="ml-auto" navbar>
+                <Nav className="ml-auto d-flex align-items-center" navbar>
+                    <SearchForm/>
                     <NavItem>
-                        {/* <NavLink to="#">Sales</NavLink>
-                        <NavLink to="#">Charts</NavLink>
-                        <NavLink to="#">Calculator</NavLink> */}
                         {steamId? 
-                            <NavLink to="/logout">logout</NavLink>
-                        : <NavLink to="/login">login</NavLink> }
+                            <NavLink className="NavBar-link" to="/logout">logout</NavLink>
+                        : null}
                         
                     </NavItem>
                 </Nav>

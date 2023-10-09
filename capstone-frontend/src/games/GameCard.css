@@ -1,0 +1,23 @@
+.GameCard{
+    background-color: #2A475E;
+    padding: 25px;
+    margin: 10px;
+    height: 250px;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.GameCard-title{
+    color: white;
+    text-decoration: none;
+    margin-top: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    height: 50px;
+}
+
+.GameCard-price{
+    text-align: center;
+    color: white;
+    margin-top: 55px;
+}

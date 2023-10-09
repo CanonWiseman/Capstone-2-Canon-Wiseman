@@ -1,0 +1,39 @@
+.RecentlyPlayed-gamecard{
+    background-color: #2A475E;
+    padding: 25px;
+    margin: 10px;
+    height: 250px;
+    width: 300px;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    
+}
+
+.carousel-item-recently-played{
+    display: flex;
+    justify-content: center;
+}
+
+.RecentlyPlayed-gamecard-link{
+    color: white;
+    text-decoration: none;
+}
+
+.recently-played-title{
+    margin-top: 20px;
+    letter-spacing: 2px;
+}
+
+.recently-played-total{
+    margin-top: 15px;
+}
+
+.carousel-container-recently-played > .react-multiple-carousel__arrow--right{
+    right: calc(34% + 1px);
+    bottom: 25px;
+}
+
+.carousel-container-recently-played > .react-multiple-carousel__arrow--left{
+    left: calc(34% + 1px);
+    bottom: 25px;
+}

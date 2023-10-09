@@ -1,11 +1,38 @@
 .SearchForm{
     position: relative;
+    margin-right: 35px;
+}
+
+#searchBar{
+    /* border-radius: 15px; */
+    background-color: #2A475E;
+    color: white;
+    border-color: #1f3344;
+}
+
+#searchBar::placeholder{
+    color:white;
 }
 
 .search-results{
-    width: 500px;
-    height: 200px;
+    width: 300px;
+    max-height: 400px;
     overflow-y: scroll;
+    position: absolute;
+    background-color: #2A475E;
+    right: 0;
+    padding: 5px 0px;
+    border-radius: 5px;
+}
+
+.search-results-link{
+    display: block;
+    color: white;
+    margin-top: 5px;
+}
+
+.search-results-link:hover{
+    background-color: #487ca5;
 }
 
 .showRes{
@@ -14,4 +41,23 @@
 
 .hideRes{
     display: none;
+}
+
+.search-results::-webkit-scrollbar {
+    width: 20px;
+}
+  
+.search-results::-webkit-scrollbar-track {
+background-color: transparent;
+}
+  
+.search-results::-webkit-scrollbar-thumb {
+background-color: #d6dee1;
+border-radius: 20px;
+border: 6px solid transparent;
+background-clip: content-box;
+}
+  
+.search-results::-webkit-scrollbar-thumb:hover {
+background-color: #a8bbbf;
 }

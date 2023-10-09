@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { SteamIdForm } from "./forms/SteamIdForm";
 import { UserDashboard } from "./user/UserDashboard";
 import { useLocalStorage } from "@uidotdev/usehooks";
+import "./Home.css";
 
 export function Home(){
     
@@ -19,8 +20,6 @@ export function Home(){
         async function getCats(){
             setIsLoading(true);
             const res = await SteamApis.getFeaturedCats();
-            //cuts new releases items length from 30 to 10
-            // res.new_releases.items.length = 10;
             setCats(res);
             setIsLoading(false);
         }
@@ -36,13 +35,22 @@ export function Home(){
         return (
             <div className="Home container">
                 <div className="row">
+                    <div className="col-12">
+                        <h2 className="Home-title">Steam Helper</h2>
+                    </div>
+
                     {steamId? 
                     <div className="col-12">
                         <UserDashboard steamId={steamId}/>
                     </div>
                     :
-                    <div className="col-12">
-                        <h2>Enter your Steam Id for a more personalized experience</h2>
+                    <div className="col-12 Home-logged-out">
+                        <h6 className="Home-section-title">What is Steam Helper?</h6>
+                        <p className="Home-section-content">Steam Helper is a companion app that scrapes data from various Steam Apis and aggregates them into one easy to access area</p>
+                        <p className="Home-section-content">Data that is recieved by Steam Helper can only be changed through Steams Website or the steam app</p>
+                        <p className="Home-section-content">If yours or others data does not show up it is due to privacy settings that can be changed under the steam profile settings on the steam app/website</p>
+                        <p className="Home-section-content">Your Steam Id number can be found under Account Details</p>
+                        <h6 className="Home-section-title">Enter Steam Id below</h6>
                         <SteamIdForm saveSteamId={saveSteamId}/>
                     </div>
                     }

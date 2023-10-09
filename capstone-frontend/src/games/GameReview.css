@@ -1,0 +1,42 @@
+.GameReviews{
+    padding-top: 40px;
+}
+
+.GameReviews-title{
+    color: white;
+    margin-bottom: 35px;
+}
+
+.GameReviews-card{
+    background-color: #2A475E;
+    padding: 20px;
+    margin: 10px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.filter-green{
+    filter: invert(46%) sepia(49%) saturate(496%) hue-rotate(71deg) brightness(89%) contrast(99%);
+}
+
+.filter-red{
+    filter: invert(19%) sepia(100%) saturate(1445%) hue-rotate(340deg) brightness(95%) contrast(76%);
+}
+
+.filter-white{
+    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(37deg) brightness(118%) contrast(120%);
+}
+
+.GameReviews-content{
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+.GameReviews-date{
+    color: white;
+    display: inline;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 0px;
+}

@@ -5,6 +5,7 @@ import Moment from 'react-moment';
 import { UserRecentlyPlayed } from "./UserRecentlyPlayed";
 import { UserGames } from "./UserGames";
 import { UserWishlist } from "./UserWishlist";
+import "./UserDashboard.css";
 
 export function UserDashboard({steamId}){
 
@@ -33,21 +34,20 @@ export function UserDashboard({steamId}){
         }
         getPlayerSummary();
     }, [steamId]);
-
-    // console.log(steamPlayerSummary);
+    
     if(isLoading){
         return <Loader/>
     }
     else{
         return (
-            <div className="container">
+            <div className="container UserDashboard">
                 <div className="row">
                     <div className="col-12">
-                        <img src={steamPlayerSummary.avatarfull} alt="Users Avatar"/>
-                        <h3>{steamPlayerSummary.personaname}</h3>
+                        <img className="UserDashboard-avatar" src={steamPlayerSummary.avatarfull} alt="Users Avatar"/>
+                        <h3 className="UserDashboard-username">{steamPlayerSummary.personaname}</h3>
                     </div>
                     <div className="col-12 d-flex justify-content-center">
-                        <table>
+                        <table className="Userdashboard-user-table">
                             <tbody>
                                 <tr>
                                     <td>Steam Id</td>
@@ -77,7 +77,7 @@ export function UserDashboard({steamId}){
                                     <td>Friends</td>
                                     <td>
                                         {steamFriends ? 
-                                            <a href={`/users/${steamId}/friends`}>{steamFriends.friendslist.friends.length}</a>
+                                            <a style={{color: "white"}} href={`/users/${steamId}/friends`}>{steamFriends.friendslist.friends.length}</a>
                                         : "N/A"}
                                         
                                     </td>
@@ -85,14 +85,14 @@ export function UserDashboard({steamId}){
                             </tbody>
                         </table>
                     </div>
-                    <div className="col-12 mt-5">
+                    <div className="col-12 col-12 UserDashboard-section">
                         <UserRecentlyPlayed steamId={steamId}/>
                     </div>
-                    <div className="col-12 mt-5">
-                        <UserGames steamId={steamId}/>
-                    </div>
-                    <div className="col-12 mt-5">
+                    <div className="col-12 UserDashboard-section">
                         <UserWishlist steamId={steamId}/>
+                    </div>
+                    <div className="col-12 UserDashboard-section">
+                        <UserGames steamId={steamId}/>
                     </div>
                 </div>
             </div>

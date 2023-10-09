@@ -1,0 +1,22 @@
+.Home{
+    padding-top: 40px;
+}
+
+.Home-title{
+    font-family: 'Unability', sans-serif;
+    color: white;  
+    letter-spacing: 3px;  
+    text-decoration: double underline;    
+}
+
+.Home-section-title{
+    color: white;
+    font-size: 1.2rem;
+    text-decoration: underline;
+    margin-bottom: 25px;
+}
+
+.Home-section-content{
+    color: white;
+    margin-bottom: 15px;
+}

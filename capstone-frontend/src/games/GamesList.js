@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Link } from "react-router-dom";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import "./GamesList.css";
 
 export function GamesList({title, games}){
 
@@ -28,7 +29,7 @@ export function GamesList({title, games}){
 
     return (
         <div className="GamesList">
-            <h3 className="GamesList-Title">{title}</h3>
+            <h3 className="GamesList-title">{title}</h3>
             <Carousel
             swipeable={true}
             draggable={true}
@@ -38,16 +39,14 @@ export function GamesList({title, games}){
             ssr={true} // means to render carousel on server-side.
             infinite={true}
             keyBoardControl={true}
-            customTransition="all .5"
-            transitionDuration={500}
-            containerClass="carousel-container"
+            containerClass="carousel-container-GamesList"
             removeArrowOnDeviceType={["tablet", "mobile"]}
             dotListClass="custom-dot-list-style"
             itemClass="carousel-item-padding-40-px"
             >
                 
                 {games.map(game =>(
-                    <Link key={uuidv4()} to={`/app/${game.id}`}>
+                    <Link style={{textDecoration: "none"}} key={uuidv4()} to={`/app/${game.id}`}>
                         <GameCard game={game}/>
                     </Link>
                 ))}

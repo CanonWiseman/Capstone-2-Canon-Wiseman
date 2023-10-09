@@ -1,0 +1,42 @@
+.UserFriends{
+    padding-top: 40px;
+}
+
+.UserFriends-user{
+    color: white;
+    font-size: 30px;
+}
+
+.UserFriends-title{
+    color: white;
+    margin-bottom: 40px;
+    font-size: 26px;
+}
+
+.UserFriends-card{
+    background-color: #2A475E;
+    padding: 25px;
+    margin: 20px 10px;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.UserFriend-friendName{
+    letter-spacing: 2px;
+    margin-top: 20px;
+    height: 30px;
+}
+
+.UserFriends-card a{
+    color: white;
+    text-decoration: none;
+}
+
+.UserFriend-lastOnline{
+    margin-top: 20px;
+}
+
+.UserFriends-card img{
+    border-radius: 10px;
+    border: 2px solid white;
+}

@@ -1,0 +1,36 @@
+.GameDetails{
+    padding-top: 40px;
+}
+
+.GameDetailsGameTitle{
+    color: white;
+    font-size: 3rem;
+}
+
+.GameDetails-tags{
+    color: white;
+}
+
+.GameDetails-tags a{
+    color: white;
+} 
+
+.GameDetails-tags img{
+    border: 2px solid white;
+    margin-bottom: 20px;
+} 
+
+.GameDetails-tags div{
+    width: 400px;
+    padding: 15px;
+    border: 1px solid white;
+    background-color: #2A475E;
+}
+
+.GameDetails-tags p{
+    margin-bottom: 0px;
+}
+
+.GameDetails-tag-title{
+    text-decoration: underline;
+}

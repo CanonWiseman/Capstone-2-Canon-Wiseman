@@ -1,0 +1,43 @@
+.UserWishlist-title{
+    color: white;
+}
+
+.carousel-item-wishlist{
+    display: flex;
+    justify-content: center;
+}
+
+.Wishlist-gamecard{
+    background-color: #2A475E;
+    padding: 25px;
+    margin: 10px;
+    height: 300px;
+    width: 400px;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.Wishlist-gamecard-link{
+    color: white;
+    text-decoration: none;
+}
+
+.Wishlist-title{
+    margin-top: 20px;
+    letter-spacing: 2px;
+}
+
+.Wishlist-date-added {
+    margin-top: 30px;
+    margin-bottom: 2px;
+}
+
+.carousel-container-wishlist > .react-multiple-carousel__arrow--right{
+    right: calc(30% + 1px);
+    bottom: 25px;
+}
+
+.carousel-container-wishlist > .react-multiple-carousel__arrow--left {
+    left: calc(30% + 1px);
+    bottom: 25px;
+}

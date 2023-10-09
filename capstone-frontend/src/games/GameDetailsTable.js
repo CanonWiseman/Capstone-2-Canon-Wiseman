@@ -1,8 +1,9 @@
 import React from "react";
+import "./GameDetailsTable.css";
 
 export function GameDetailsTable({gameDetails}){
     return (
-        <table>
+        <table className="GameDetailsTable">
             <tbody>
                 <tr>
                     <td>App Id</td>

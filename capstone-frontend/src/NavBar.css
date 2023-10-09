@@ -1,0 +1,23 @@
+.NavBar{
+    background-color: #101e23;
+    position: sticky;
+    width: 100vw;
+    top: 0;
+    z-index: 99;
+}
+
+.NavBar-link{
+    color: white;
+    margin-right: 60px;
+}
+
+.NavBar-logo{
+    color: white;
+    font-family: 'Unability', sans-serif;
+    letter-spacing: 3px;
+    font-style: italic;
+}
+
+.Home-logged-out{
+    padding-top: 40px;
+}
