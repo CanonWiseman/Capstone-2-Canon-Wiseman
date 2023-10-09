@@ -10,13 +10,13 @@ import { UserNews } from "../user/UserNews";
 import { GameReviews } from "./GameReviews";
 import "./GameDetails.css";
 import { useNavigate} from "react-router-dom";
+import { GameMovies } from "./GameMovies";
 
 export function GameDetails(){
     const [isLoading, setIsLoading] = useState(true);
     const [gameDetails, setGameDetails] = useState(null);
     const [playerCount, setPlayerCount] = useState(null);
     const [gameSchema, setGameSchema] = useState(null);
-    // const [steamSpyTags, setSteamSpyTags] = useState(null);
 
     const params = useParams();
     let navigate = useNavigate();
@@ -27,17 +27,12 @@ export function GameDetails(){
             setGameDetails(details[`${params.id}`].data);
             const userCount = await SteamApis.getPlayerCount(params.id);
             setPlayerCount(userCount.response.player_count);
-            // const res3 = await SteamApis.getSteamSpyDetails(params.id);
             const achievments = await SteamApis.getGameSchema(params.id);
             setGameSchema(achievments);
-            
-            // setSteamSpyTags(res3.tags);
             setIsLoading(false);
         }
         getDetails();
     }, [params.id])
-
-    console.log(gameDetails);
 
     if(isLoading){
         return <Loader/>
@@ -93,7 +88,8 @@ export function GameDetails(){
                     </div>
                 </div>
                 <div className="row">
-                    <GameScreenshots screenshots={gameDetails.screenshots} movies={gameDetails.movies}/>
+                    <GameScreenshots screenshots={gameDetails.screenshots}/>
+                    <GameMovies movies={gameDetails.movies}/>
                     <UserNews appIds={[{appId: params.id, appName: gameDetails.name}]} title="" numArticles={100}/>
                     <GameAchievements schema={gameSchema}/>
                     <GameReviews appId={params.id}/>

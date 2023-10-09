@@ -36,7 +36,7 @@ export function Home(){
             <div className="Home container">
                 <div className="row">
                     <div className="col-12">
-                        <h2 className="Home-title">Steam Helper</h2>
+                        <h2 className="Home-title">Steam Sync</h2>
                     </div>
 
                     {steamId? 
@@ -45,8 +45,8 @@ export function Home(){
                     </div>
                     :
                     <div className="col-12 Home-logged-out">
-                        <h6 className="Home-section-title">What is Steam Helper?</h6>
-                        <p className="Home-section-content">Steam Helper is a companion app that scrapes data from various Steam Apis and aggregates them into one easy to access area</p>
+                        <h6 className="Home-section-title">What is Steam Sync?</h6>
+                        <p className="Home-section-content">Steam Sync is a companion app that scrapes data from various Steam Apis and aggregates them into one easy to access area</p>
                         <p className="Home-section-content">Data that is recieved by Steam Helper can only be changed through Steams Website or the steam app</p>
                         <p className="Home-section-content">If yours or others data does not show up it is due to privacy settings that can be changed under the steam profile settings on the steam app/website</p>
                         <p className="Home-section-content">Your Steam Id number can be found under Account Details</p>

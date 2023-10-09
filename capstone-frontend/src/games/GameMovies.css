@@ -1,0 +1,16 @@
+.Movies-title{
+    margin-top: 40px;
+    margin-bottom: 35px;
+    color: white;
+}
+
+.carousel-container-movies > .react-multiple-carousel__arrow--right{
+    right: calc(13% + 1px);
+}
+.carousel-container-movies > .react-multiple-carousel__arrow--left{
+    left: calc(13% + 1px);
+}
+
+.Movies-container{
+    border: 2px solid white;
+}

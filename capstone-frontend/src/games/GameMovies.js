@@ -1,10 +1,10 @@
 import React from "react";
-import "./GameScreenshots.css";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { v4 as uuidv4 } from 'uuid';
+import "./GameMovies.css";
 
-export function GameScreenshots({screenshots}){
+export function GameMovies({movies}){
     const responsive = {
         superLargeDesktop: {
           breakpoint: { max: 4000, min: 3000 },
@@ -23,11 +23,11 @@ export function GameScreenshots({screenshots}){
           items: 1
         }
       };
-      
-    if(screenshots){
-        return (
-            <div className="col-lg-12 Screenshots">
-                <h2 className="Screenshots-title">Screenshots</h2>
+
+      if(movies){
+        return(
+            <div className="col-lg-12 Movies">
+                <h2 className="Movies-title">Movies</h2>
                 <div className="">
                     <Carousel
                         swipeable={true}
@@ -36,30 +36,31 @@ export function GameScreenshots({screenshots}){
                         showDots={true}
                         responsive={responsive}
                         keyBoardControl={true}
-                        infinite={true}
-                        containerClass="carousel-container-screenshots"
+                        infinite={false}
+                        containerClass="carousel-container-movies"
                         removeArrowOnDeviceType={["tablet", "mobile"]}
                         dotListClass="custom-dot-list-style carousel-item-screenshots"
                         itemClass="carousel-item-padding-40-px "
                     >
                         
-                        {screenshots.map(screenshot => (
+                        {movies.map(movie => (
                             <div key={uuidv4()}>
-                                <img src={screenshot.path_full} alt={screenshot.id} className="screenshot"/>
+                                <video className="Movies-container" width="auto" height="auto" max-height="500" max-width="500" controls="controls" preload="metadata">
+                                    <source src={`${movie.mp4["480"]}#t=1`} type="video/mp4" />
+                                </video>
                             </div>
                         ))}
                     </Carousel>
                 </div>
             </div>
         )
-    }
-    else{
+      }
+      else{
         return (
-            <div className="col-lg-12 Screenshots">
-                <h2 className="Screenshots-title">Screenshots</h2>
-                <p className="data-unavailable">No screenshots available</p>
+            <div className="col-lg-12 Movies">
+                <h2 className="Movies-title">Movies</h2>
+                <p className="data-unavailable">No movies available</p>
             </div>
         )
     }
-    
 }

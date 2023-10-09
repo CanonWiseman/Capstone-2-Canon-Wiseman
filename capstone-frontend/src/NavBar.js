@@ -13,7 +13,7 @@ export function NavBar(){
         <div className="NavBar">
             <Navbar expand="md">
                 <Link to="/" className="NavBar-logo">
-                    Steam Helper
+                    Steam Sync
                 </Link>
                 <Nav className="ml-auto d-flex align-items-center" navbar>
                     <SearchForm/>
