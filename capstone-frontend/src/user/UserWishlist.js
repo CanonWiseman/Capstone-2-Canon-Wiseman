@@ -83,7 +83,7 @@ export function UserWishlist({steamId}){
                         keyBoardControl={true}
                         containerClass="carousel-container-wishlist"
                         removeArrowOnDeviceType={["tablet", "mobile"]}
-                        dotListClass="custom-dot-list-style"
+                        dotListClass="wishlist-dot-list-style"
                         itemClass="carousel-item-padding-40-px carousel-item-wishlist"
                         partialVisible={false}
                         afterChange={(previousSlide, {currentSlide}) => {

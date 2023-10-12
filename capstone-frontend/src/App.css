@@ -9,6 +9,7 @@ main{
 .data-unavailable{
   color: white;
   margin-bottom: 30px;
+  font-size: 24px;
 }
 
 .back-btn{

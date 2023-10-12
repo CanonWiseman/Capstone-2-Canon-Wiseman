@@ -34,10 +34,18 @@
 
 .carousel-container-wishlist > .react-multiple-carousel__arrow--right{
     right: calc(30% + 1px);
-    bottom: 25px;
+    bottom: 50px;
 }
 
 .carousel-container-wishlist > .react-multiple-carousel__arrow--left {
     left: calc(30% + 1px);
-    bottom: 25px;
+    bottom: 50px;
+}
+
+.wishlist-dot-list-style{
+    flex-wrap: wrap;
+}
+
+.carousel-container-wishlist{
+    padding-bottom: 40px;
 }

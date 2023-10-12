@@ -101,7 +101,7 @@ export function UserRecentlyPlayed({steamId}){
                             : null}
                                 </div>
                         
-                            : <div className="col-12 data-unavailable"><h5>Recently played Data unavailable</h5></div>}
+                            : <div className="col-12"><h5 className="data-unavailable">Recently played Data unavailable</h5></div>}
 
                 </div>
             </div>

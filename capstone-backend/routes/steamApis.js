@@ -51,51 +51,7 @@ router.get('/getSteamSpyDetails', async function(req, res, next){
         return next(err);
     }
 });
-
-//**************************/
-//Routes for Steam Store Data Api on Rapid API
-//Link to rapid API page https://rapidapi.com/archergardinersheridan/api/steam-store-data
-//**************************/
-//None of the these routes are needed but will be kept just in case
-
-const steamStoreDataUrl = "https://steam-store-data.p.rapidapi.com";
-const steamStoreDataHost = "steam-store-data.p.rapidapi.com";
-
-// router.get('/getFeaturedGames', async function(req, res, next){
-//     try{
-//         const response = await axios({
-//             method: 'get',
-//             url: `${steamStoreDataUrl}/api/featured`,
-//             headers: {
-//                 "X-RapidAPI-Key": steamStoreDataKey,
-//                 "X-RapidAPI-Host": steamStoreDataHost
-//             }
-//         });
-//         return res.status(201).json(response.data);
-//     }
-//     catch(err){
-//         return next(err);
-//     }
-// });
-
-// router.get('/getFeaturedCats', async function(req, res, next){
-//     try{
-//         const response = await axios({
-//             method: 'get',
-//             url: `${steamStoreDataUrl}/api/featuredcategories`,
-//             headers: {
-//                 "X-RapidAPI-Key": steamStoreDataKey,
-//                 "X-RapidAPI-Host": steamStoreDataHost
-//             }
-//         });
-//         return res.status(201).json(response.data);
-//     }
-//     catch(err){
-//         return next(err);
-//     }
-// });
-
-
+ 
 //**************************/
 //Routes for Steam API
 //**************************/
@@ -151,8 +107,6 @@ router.get('/getWishlist2', async function(req,res,next){
             url: `${steamApiUrl}/wishlist/id/${steamId}/wishlistdata`
         });
 
-        console.log(response);
-
         return res.status(201).json(response.data);
     }
     catch(err){
@@ -166,7 +120,7 @@ router.get('/getReviews', async function(req,res,next){
     try{
         const response = await axios({
             method: 'get',
-            url: `${steamApiUrl}/appreviews/${appId}?json=1&language=english&num_per_page=100&filter=recent&review_type=${reviewType}`
+            url: `${steamApiUrl}/appreviews/${appId}?json=1&language=english&num_per_page=100&filter=recent`
         }); 
         return res.status(201).json(response.data);
     }

@@ -39,7 +39,7 @@ export function GameScreenshots({screenshots}){
                         infinite={true}
                         containerClass="carousel-container-screenshots"
                         removeArrowOnDeviceType={["tablet", "mobile"]}
-                        dotListClass="custom-dot-list-style carousel-item-screenshots"
+                        dotListClass="custom-dot-list-style carousel-dot-screenshots"
                         itemClass="carousel-item-padding-40-px "
                     >
                         

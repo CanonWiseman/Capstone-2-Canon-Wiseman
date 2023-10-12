@@ -19,6 +19,7 @@ export function UserDashboard({steamId}){
             if(steamId && steamId !== null){
                 setIsLoading(true);
                 const playerLevel = await SteamApis.getPlayerLevel(steamId);
+                console.log(playerLevel);
                 setSteamPlayerLevel(playerLevel.response);
                 const playerSummary = await SteamApis.getPlayerSummary(steamId);
                 setSteamPlayerSummary(playerSummary.response.players[0]);
@@ -69,10 +70,13 @@ export function UserDashboard({steamId}){
                                     <td>Profile Created</td>
                                     <td><Moment format="MM/DD/YYYY" unix>{steamPlayerSummary.timecreated}</Moment></td>
                                 </tr>
-                                <tr>
-                                    <td>Steam Level</td>
-                                    <td>{steamPlayerLevel.player_level}</td>
-                                </tr>
+                                    {steamPlayerLevel.response?
+                                    <tr>
+                                        <td>Steam Level</td>
+                                        <td>{steamPlayerLevel.player_level}</td>
+                                    </tr>
+                                    : null
+                                    }
                                 <tr>
                                     <td>Friends</td>
                                     <td>

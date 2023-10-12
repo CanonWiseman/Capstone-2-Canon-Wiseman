@@ -3,7 +3,7 @@
     position: sticky;
     width: 100vw;
     top: 0;
-    z-index: 99;
+    z-index: 9999;
 }
 
 .NavBar-link{

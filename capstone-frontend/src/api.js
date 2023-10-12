@@ -86,7 +86,7 @@ class SteamApis {
   }
 
   static async getReviews(appId, reviewType){
-    let res = await this.request(`steam/getReviews?appId=${appId}&reviewType=${reviewType}`);
+    let res = await this.request(`steam/getReviews?appId=${appId}`);
     return res;
   }
   //**************end functions for steam api ******************/

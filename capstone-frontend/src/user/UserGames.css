@@ -21,3 +21,11 @@
 .UserGames{
     padding-bottom: 40px;
 }
+
+.UserGames-view-btns{
+    margin-bottom: 15px;
+}
+
+.active-icon{
+    border: 2px solid white;
+}

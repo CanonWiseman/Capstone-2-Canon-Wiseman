@@ -6,26 +6,14 @@ const express = require("express");
 const cors = require("cors");
 
 const { NotFoundError } = require("./expressError");
-
-const { authenticateJWT } = require("./middleware/auth");
-const authRoutes = require("./routes/auth");
-const companiesRoutes = require("./routes/companies");
-const usersRoutes = require("./routes/users");
-const jobsRoutes = require("./routes/jobs");
 const steamRoutes = require("./routes/steamApis");
-const morgan = require("morgan");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(morgan("tiny"));
-app.use(authenticateJWT);
 
-app.use("/auth", authRoutes);
-app.use("/companies", companiesRoutes);
-app.use("/users", usersRoutes);
-app.use("/jobs", jobsRoutes);
+
 app.use("/steam", steamRoutes);
 
 /** Handle 404 errors -- this matches everything */
