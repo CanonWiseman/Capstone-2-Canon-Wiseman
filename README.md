@@ -43,3 +43,11 @@ This api will be the a majority of the API calls for user information and the re
 
 With both of these APIs, the data will need to be cleaned before they are used as both apis do not have standardized data and sometimes returns data that will not work within the site.
 
+**Looking Toward The Future**
+
+While I am very happy with the current state of Steam Sync, here are some things I would like to improve in the future.
+
+ - Faster loading times for each page
+ - A cleaner way to parse Steams BBCode 
+ - Either a way to filter out languages from news articles or a way to translate articles to a specific language
+
