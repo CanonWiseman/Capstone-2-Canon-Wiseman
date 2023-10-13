@@ -51,3 +51,5 @@ While I am very happy with the current state of Steam Sync, here are some things
  - A cleaner way to parse Steams BBCode 
  - Either a way to filter out languages from news articles or a way to translate articles to a specific language
 
+
+**Thank You For Your Time**
